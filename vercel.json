@@ -5,10 +5,5 @@
             "src": "package.json",
             "use": "@vercel/next"
         }
-    ],
-    "env": {
-        "NEXT_PUBLIC_WS_URL": "@next_public_ws_url",
-        "JWT_SECRET": "@jwt_secret",
-        "DATABASE_URL": "@database_url"
-    }
+    ]
 }
