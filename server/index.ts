@@ -72,7 +72,7 @@ const saveToDatabase = async (documentName: string, state: Uint8Array): Promise<
         // updateMany: zero rows updated = document was deleted. NEVER re-create.
         const result = await prisma.document.updateMany({
             where: { id: documentName },
-            data: { data: Buffer.from(state), updatedAt: new Date() },
+            data: { data: Buffer.from(state).toString('base64'), updatedAt: new Date() },
         })
         if (result.count === 0) {
             // DB is authoritative: doc is gone → populate cache
@@ -172,7 +172,7 @@ async function startServer() {
                         deletedDocIdsCache.add(documentName) // warm cache on fetch miss
                         throw new Error('Document not found')
                     }
-                    return doc.data || null
+                    return doc.data ? Buffer.from(doc.data, 'base64') : null
                 },
                 store: async ({ documentName, state }) => {
                     scheduleWrite(documentName, state)
