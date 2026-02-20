@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "dev:all": "concurrently --names \"NEXT,HOCUS\" --prefix-colors \"blue,green\" \"npm run dev\" \"npx ts-node -P tsconfig.server.json server/index.ts\"",
+    "start:server": "npx ts-node -P tsconfig.server.json server/index.ts",
     "electron-dev": "tsc -p electron/tsconfig.json && electron .",
     "electron-build": "tsc -p electron/tsconfig.json && electron-builder",
     "electron-build-prod": "ELECTRON_BUILD=1 next build && tsc -p electron/tsconfig.json && electron-builder"
